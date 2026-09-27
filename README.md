@@ -105,7 +105,7 @@ I am continuously learning, building projects, experimenting with new technologi
 
 ### Portfolio
 
-🌐 **Live Website:** https://samson-mumba.vercel.app?utm_source=chatgpt.com
+🌐 **Live Website:** https://samson-mumba.vercel.app
 
 ---
 

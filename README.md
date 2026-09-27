@@ -4,7 +4,7 @@ My personal portfolio website showcasing my journey, projects, skills, and inter
 
 ## About
 
-I am a Computer Science student passionate about building practical software solutions and continuously expanding my knowledge in modern technologies.
+I am a Computer Scientist passionate about building practical software solutions and continuously expanding my knowledge in modern technologies.
 
 My current focus is on:
 

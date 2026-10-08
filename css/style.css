@@ -179,6 +179,47 @@ main {
 
 
 /* =========================================================
+   HEADER SOCIAL ICONS
+   ========================================================= */
+
+.header-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    background: transparent;
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        transform 0.2s ease;
+}
+
+.social-link:hover {
+    color: var(--accent);
+    background-color: rgba(199, 255, 74, 0.1);
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition:
+        color 0.3s ease,
+        transform 0.2s ease;
+}
+
+
+/* =========================================================
    MOBILE MENU BUTTON
    ========================================================= */
 
@@ -908,6 +949,20 @@ main {
 
     .nav-links {
         display: none;
+    }
+
+    .header-social {
+        gap: 12px;
+    }
+
+    .social-link {
+        width: 36px;
+        height: 36px;
+    }
+
+    .social-icon {
+        width: 18px;
+        height: 18px;
     }
 
     .menu-toggle {

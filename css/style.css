@@ -170,6 +170,13 @@ main {
         width 0.3s ease;
 }
 
+/* Restores the hover underline. The base rule above animates the width from
+   0, but without this the width is never driven back to 100% on hover, so the
+   underline never appears. */
+.nav-links a:hover::after {
+    width: 100%;
+}
+
 
 /* =========================================================
    MOBILE MENU BUTTON
@@ -207,6 +214,8 @@ main {
    HERO
    ========================================================= */
 
+/* Single column. A two-track grid would leave a large empty column now
+   that the hero is content-only. */
 .hero {
     min-height: 100vh;
 
@@ -221,15 +230,11 @@ main {
 
     padding-bottom: 100px;
 
-    display: grid;
+    display: flex;
 
-    grid-template-columns:
-        minmax(0, 1.25fr)
-        minmax(320px, 0.75fr);
+    flex-direction: column;
 
-    align-items: center;
-
-    gap: 90px;
+    justify-content: center;
 }
 
 .hero-content {
@@ -323,142 +328,18 @@ main {
 
 
 /* =========================================================
-   HERO VISUAL
-   ========================================================= */
-
-.hero-visual {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap: 18px;
-}
-
-
-/* =========================================================
-   TERMINAL
-   ========================================================= */
-
-.hero-terminal {
-    width: 100%;
-
-    overflow: hidden;
-
-    background: #0e0e0e;
-
-    border: 1px solid var(--border);
-
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45);
-
-    transform:
-        perspective(1000px)
-        rotateY(-3deg);
-
-    transition:
-        transform 0.5s ease,
-        border-color 0.5s ease;
-}
-
-.hero-terminal:hover {
-    transform:
-        perspective(1000px)
-        rotateY(0deg);
-
-    border-color: #3a3a3a;
-}
-
-.terminal-header {
-    height: 46px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 0 16px;
-
-    border-bottom: 1px solid var(--border);
-
-    color: var(--text-muted);
-
-    font-family:
-        "Courier New",
-        Courier,
-        monospace;
-
-    font-size: 11px;
-}
-
-.terminal-dots {
-    display: flex;
-
-    gap: 6px;
-}
-
-.terminal-dots span {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-
-    background: #444444;
-}
-
-.terminal-body {
-    padding: 30px;
-
-    font-family:
-        "Courier New",
-        Courier,
-        monospace;
-
-    font-size: 13px;
-}
-
-.terminal-body p {
-    margin-bottom: 8px;
-}
-
-.terminal-prompt {
-    color: var(--accent);
-}
-
-.terminal-output {
-    margin-bottom: 20px !important;
-
-    color: var(--text-secondary);
-}
-
-.terminal-cursor {
-    color: var(--accent);
-
-    animation:
-        blink 1s steps(1) infinite;
-}
-
-@keyframes blink {
-
-    50% {
-        opacity: 0;
-    }
-
-}
-
-
-/* =========================================================
    HERO STATUS
    ========================================================= */
 
+/* Sits below the hero buttons. */
 .hero-status {
     display: flex;
 
     align-items: center;
 
     gap: 10px;
+
+    margin-top: 34px;
 
     padding-left: 4px;
 
@@ -533,95 +414,6 @@ main {
 
 
 /* =========================================================
-   ABOUT
-   ========================================================= */
-
-.about-content {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(320px, 0.85fr);
-
-    gap: 100px;
-
-    align-items: start;
-}
-
-.about-text {
-    max-width: 650px;
-}
-
-.about-text p {
-    margin-bottom: 28px;
-
-    font-size: 19px;
-
-    line-height: 1.8;
-
-    color: var(--text-secondary);
-}
-
-.about-text p:last-child {
-    margin-bottom: 0;
-}
-
-.about-image {
-    position: relative;
-
-    min-height: 560px;
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    overflow: hidden;
-}
-
-.about-image img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-}
-
-.about-image::before {
-    content: "YOUR PHOTO";
-
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    font-size: 11px;
-
-    letter-spacing: 0.15em;
-
-    color: var(--text-muted);
-}
-
-.about-image::after {
-    content: "";
-
-    position: absolute;
-
-    top: 18px;
-    right: 18px;
-
-    width: 45px;
-    height: 45px;
-
-    border-top: 1px solid var(--accent);
-
-    border-right: 1px solid var(--accent);
-}
-
-
-/* =========================================================
    PROJECTS
    ========================================================= */
 
@@ -631,10 +423,17 @@ main {
     grid-template-columns:
         repeat(2, 1fr);
 
+    /* Cards size to their own content, so a longer technology list on one card
+       cannot stretch its grid row and leave the other card short. */
+    align-items: start;
+
     gap: 20px;
 }
 
 .project-card {
+    /* Grows to fit the longer technology list on the InvestHand card instead
+       of forcing both cards to a fixed height. min-height keeps the two cards
+       visually matched when their content is closer in length. */
     min-height: 520px;
 
     padding: 42px;
@@ -837,177 +636,6 @@ main {
     color: var(--text-primary);
 
     border-color: #444444;
-}
-
-
-/* =========================================================
-   WRITING
-   ========================================================= */
-
-.creative-content {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 50px;
-
-    padding: 60px 0;
-
-    border-top: 1px solid var(--border);
-
-    border-bottom: 1px solid var(--border);
-}
-
-.creative-content p {
-    width: 100%;
-
-    max-width: 760px;
-
-    margin: 0;
-
-    font-size: clamp(
-        30px,
-        4.2vw,
-        54px
-    );
-
-    line-height: 1.08;
-
-    letter-spacing: -0.045em;
-}
-
-
-/* =========================================================
-   SELECTED WRITING
-   ========================================================= */
-
-.selected-writing {
-    margin-top: 120px;
-}
-
-.selected-writing[hidden] {
-    display: none;
-}
-
-.writing-heading {
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    padding-bottom: 24px;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.writing-heading .section-number {
-    margin: 0;
-}
-
-.writing-heading > p:last-child {
-    color: var(--text-muted);
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   POEMS
-   ========================================================= */
-
-.poem {
-    padding: 70px 0;
-
-    border-bottom: 1px solid var(--border);
-}
-
-.poem-meta {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 30px;
-
-    font-size: 11px;
-
-    letter-spacing: 0.12em;
-
-    text-transform: uppercase;
-
-    color: var(--text-muted);
-}
-
-.poem h3 {
-    margin-bottom: 42px;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: clamp(
-        42px,
-        6vw,
-        72px
-    );
-
-    font-weight: 400;
-
-    line-height: 1;
-
-    letter-spacing: -0.04em;
-
-    color: var(--text-primary);
-}
-
-.poem-text {
-    max-width: 720px;
-
-    margin-left: auto;
-
-    margin-right: 8%;
-
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size: 19px;
-
-    line-height: 1.9;
-
-    color: var(--text-secondary);
-}
-
-.poem-text p {
-    margin-bottom: 32px;
-}
-
-.poem-text p:last-child {
-    margin-bottom: 0;
-}
-
-.poem-text em {
-    color: var(--text-primary);
-
-    font-style: italic;
-}
-
-.poem-text strong {
-    color: var(--text-primary);
-
-    font-weight: 400;
-}
-
-.poem-ending {
-    color: var(--text-primary);
 }
 
 
@@ -1224,37 +852,13 @@ main {
 @media (max-width: 900px) {
 
     .hero {
-        grid-template-columns: 1fr;
-
-        gap: 60px;
-
         padding-top: 140px;
-    }
-
-    .hero-terminal {
-        max-width: 650px;
-
-        transform: none;
-    }
-
-    .hero-terminal:hover {
-        transform: none;
     }
 
     .section-heading {
         grid-template-columns: 1fr;
 
         gap: 20px;
-    }
-
-    .about-content {
-        grid-template-columns: 1fr;
-
-        gap: 50px;
-    }
-
-    .about-image {
-        min-height: 400px;
     }
 
     .projects {
@@ -1372,75 +976,6 @@ main {
 
 
     /* -----------------------------------------------------
-       WRITING
-       ----------------------------------------------------- */
-
-    .creative-content {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 30px;
-
-        padding: 45px 0;
-    }
-
-    .creative-content p {
-        max-width: 100%;
-
-        font-size: clamp(
-            28px,
-            8vw,
-            42px
-        );
-
-        line-height: 1.12;
-
-        letter-spacing: -0.04em;
-    }
-
-    .creative-content .button {
-        width: 100%;
-    }
-
-    .selected-writing {
-        margin-top: 80px;
-    }
-
-    .writing-heading {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 12px;
-    }
-
-    .poem {
-        padding: 55px 0;
-    }
-
-    .poem h3 {
-        margin-bottom: 35px;
-
-        font-size: 44px;
-    }
-
-    .poem-text {
-        max-width: 100%;
-
-        margin: 0;
-
-        font-size: 17px;
-
-        line-height: 1.8;
-    }
-
-    .poem-text p {
-        margin-bottom: 26px;
-    }
-
-
-    /* -----------------------------------------------------
        CONTACT
        ----------------------------------------------------- */
 
@@ -1510,12 +1045,6 @@ main {
 
     .skill-items span {
         font-size: 11px;
-    }
-
-    .terminal-body {
-        padding: 20px;
-
-        font-size: 12px;
     }
 
 }

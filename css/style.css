@@ -947,6 +947,10 @@ main {
         height: 70px;
     }
 
+    .logo {
+        font-size: 12px;
+    }
+
     .nav-links {
         display: none;
     }

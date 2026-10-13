@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samson-mumba.vercel.app/sitemap.xml
